@@ -1,1 +1,1 @@
-# food-chain-game
+http://naruru.html.xdomain.jp/advanced-marubatu/index.html
