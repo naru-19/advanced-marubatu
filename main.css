@@ -1,91 +1,196 @@
+.open {
+	cursor:pointer;
+    border: 2px solid #446464;
+    padding:2px;
+}
+#pop-up {
+	display: none;
+}
+.overlay {
+	display: none;
+}
+#pop-up:checked + .overlay {
+	display: block;
+	position: fixed;
+	width: 100%;
+	height: 100vh;
+	top: 0;
+	left: 0;
+	z-index: 9999;
+	background: rgba(0, 0, 0, 0.6);
+}
+.window {
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	width: 90vw;
+	max-width: 360px;
+    padding: 20px;
+	height: 300px;
+	background-color: #fff;
+	border-radius: 4px;
+	align-items: center;
+	transform: translate(-50%, -50%);
+}
+.close {
+	position: absolute;
+	top: 4px;
+	right: 4px;
+	cursor:pointer;
+}
+
+body {
+overflow-x: hidden;
+}
+.row{
+    margin-left:0;
+    margin-right: 0;
+}
+.turn-info{
+    font-size: 15px;
+    text-align:center;
+}
 button:focus {
-  outline: 0;
+    outline: 0;
 }
-.turn-info {
-  font-size: 40px;
-  text-align: center;
+#hold-info{
+    font-size: 15px;
 }
-.reset-button button {
-  margin-top: 60px;
-  background-color: white;
-  height: 80px;
-  border-radius: 10px;
-  font-size: 30px;
-}
-.container {
-  width: 900px;
-  margin-top: 70px;
+.container{
+    padding: 0;
 }
 .line .col-4 {
-  border: 0px solid black;
-  text-align: center;
-  padding: 0;
+    border: 0px solid black;
+    text-align: center;
+    padding: 0;
 }
-.row {
-  padding: 0;
-  margin: 0;
-}
-button {
-  height: 130px;
-  width: 100%;
-  border: 2px solid black;
-}
-.ox {
-  font-size: 50px;
+.col-4 button{
+    height: 20vw;
+    width: 100%;
 }
 .desc {
-  text-align: center;
+    text-align: center;
 }
 .red {
-  color: red;
+    color: red;
 }
 .blue {
-  color: blue;
+    color: blue;
 }
-.l {
-  font-size: 60px;
-  text-align: center;
-}
-.l span {
-  padding: 0 17px 0 22px;
-  border-radius: 60px;
-}
-.m {
-  font-size: 40px;
-  text-align: center;
-}
-.m span {
-  padding: 0 6px 0 6px;
-  border-radius: 30px;
-}
-.s {
-  font-size: 20px;
-  text-align: center;
-}
-.s span {
-  padding: 0 6px 0 6px;
-  border-radius: 30px;
+
+.pieces button {
+    background-color: white;
+    border: none;
+    margin: 0;
+    padding: 0;
 }
 button .red {
-  border: 2px solid red;
+    border: 2px solid red;
 }
 button .blue {
-  border: 2px solid blue;
+    border: 2px solid blue;
 }
-.pieces button {
-  background-color: white;
-  border: none;
-  margin: 0;
-  padding: 0;
-  height: 120px;
+.l {
+    font-size: 40px;
+    text-align: center;
 }
-.cancel {
-  margin-top: 50px;
+.l span {
+    padding: 0 13px 0 13px;
+    border-radius: 60px;
+}
+.m {
+    font-size: 30px;
+    text-align: center;
+}
+.m span {
+    padding: 0 6px 0 6px;
+    border-radius: 30px;
+}
+.s {
+    font-size: 20px;
+    text-align: center;
+}
+.s span {
+    padding: 0 6px 0 6px;
+    border-radius: 30px;
 }
 .cancel button {
-  margin-top: 60px;
-  background-color: white;
-  height: 80px;
-  border-radius: 10px;
-  font-size: 30px;
+    margin-top: 30px;
+    background-color: white;
+    height: 80px;
+    border-radius: 10px;
+    font-size: 30px;
+    width: 100%;
+}
+.reset-button button {
+    margin-top: 30px;
+    background-color: white;
+    height: 80px;
+    border-radius: 10px;
+    font-size: 30px;
+    width: 100%;
+}
+@media screen and (min-width: 576px) {
+    .turn-info {
+        font-size: 40px;
+    }
+    #hold-info{
+        font-size: 30px;
+    }
+    .reset-button button {
+        margin-top: 60px;
+        font-size: 30px;
+    }
+    .container {
+        width: 900px;
+        margin-top: 70px;
+    }
+    .line .col-4 {
+        border: 0px solid black;
+        text-align: center;
+        padding: 0;
+    }
+    .col-4 button{
+        height: 130px;
+    }
+    .row {
+        padding: 0;
+        margin: 0;
+    }
+    button {
+        width: 100%;
+        border: 2px solid black;
+    }
+    .ox {
+        font-size: 50px;
+    }
+
+    .l {
+        font-size: 60px;
+    }
+    .l span {
+        padding: 0 17px 0 22px;
+        border-radius: 60px;
+    }
+    .m {
+        font-size: 40px;
+    }
+    .m span {
+        padding: 0 6px 0 6px;
+        border-radius: 30px;
+    }
+    .s {
+        font-size: 20px;
+    }
+    .s span {
+        padding: 0 6px 0 6px;
+        border-radius: 30px;
+    }
+    .pieces button {
+        height: 120px;
+    }
+    .cancel button {
+        margin-top: 60px;
+        font-size: 30px;
+    }
 }

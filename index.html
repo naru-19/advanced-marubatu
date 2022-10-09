@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <meta http-equiv="content-type" charset="utf-8">
     <link
       rel="stylesheet"
       href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
@@ -25,8 +26,24 @@
     />
   </head>
   <body>
+    
+    <input type="checkbox" id="pop-up">
+    <div class="overlay">
+        <div class="window">
+            <label class="close" for="pop-up">閉じる</label>
+            <h4>ルール</h4>
+            <p>自身の色を縦横斜めのいずれかで揃えると勝ち!<br>LはM,Sの上に、MはSの上に重ねておけるよ。<br>
+                盤面上に一度置いた駒も動かすこともできるよ。持ち上げた際に相手の駒が揃うと負けだから注意！！<br>
+                盤面上の駒は一度持ち上げたらキャンセルできないよ!!!
+            </p>
+        </div>
+    </div>
     <div class="board container">
       <div class="row">
+        <div class="col-10"></div>
+        <div class="col-2 rule">
+            <label class="open" for="pop-up">ルール</label>
+        </div>
         <div class="col-3"></div>
         <div class="col-6 turn-info">Turn:<span id="turn">■</span></div>
         <div class="col-3"></div>
@@ -34,33 +51,12 @@
         <div
           class="col-6"
           id="hold-info"
-          style="text-align: center; font-size: 30px"
+          style="text-align: center; "
         >
           現在持っている駒
         </div>
         <div class="col-3"></div>
-        <div class="row col-3 red pieces">
-          <div class="col-12 desc">赤チーム</div>
-          <button class="col-6 l" id="0-3-1" onclick="pickup(3,1,0)">
-            <span class="piece red">L</span>
-          </button>
-          <button class="col-6 l" id="0-3-2" onclick="pickup(3,2,0)">
-            <span class="piece red">L</span>
-          </button>
-          <button class="col-6 m" id="0-2-1" onclick="pickup(2,1,0)">
-            <span class="piece red">M</span>
-          </button>
-          <button class="col-6 m" id="0-2-2" onclick="pickup(2,2,0)">
-            <span class="piece red">M</span>
-          </button>
-          <button class="col-6 s" id="0-1-1" onclick="pickup(1,1,0)">
-            <span class="piece red">S</span>
-          </button>
-          <button class="col-6 s" id="0-1-2" onclick="pickup(1,2,0)">
-            <span class="piece red">S</span>
-          </button>
-        </div>
-        <div class="row col-6 line">
+        <div class="row col-12 col-sm-6 line order-sm-2">
           <div class="col-4">
             <button id="button-0" onclick="put_board(0)">
               <div class="" id="0">
@@ -96,7 +92,6 @@
               </div>
             </button>
           </div>
-
           <div class="col-4">
             <button id="button-5" onclick="put_board(5)">
               <div class="" id="5">
@@ -126,34 +121,55 @@
             </button>
           </div>
         </div>
-
-        <div class="row col-3 blue pieces">
+        <!-- <div class="col-sm-3"id="pieces_blue_margin"></div> -->
+        <div class="row col-12 col-sm-3 red pieces order-sm-1"id="pieces_red">
+          <div class="col-12 desc">赤チーム</div>
+          <button class="col-4 col-sm-6 l" id="0-3-1" onclick="pickup(3,1,0)">
+            <span class="piece red">L</span>
+          </button>
+          <button class="col-4 col-sm-6 l" id="0-3-2" onclick="pickup(3,2,0)">
+            <span class="piece red">L</span>
+          </button>
+          <button class="col-4 col-sm-6 m" id="0-2-1" onclick="pickup(2,1,0)">
+            <span class="piece red">M</span>
+          </button>
+          <button class="col-4 col-sm-6 m" id="0-2-2" onclick="pickup(2,2,0)">
+            <span class="piece red">M</span>
+          </button>
+          <button class="col-4 col-sm-6 s" id="0-1-1" onclick="pickup(1,1,0)">
+            <span class="piece red">S</span>
+          </button>
+          <button class="col-4 col-sm-6 s" id="0-1-2" onclick="pickup(1,2,0)">
+            <span class="piece red">S</span>
+          </button>
+        </div>
+        <div class="row col-12 col-sm-3 blue pieces order-sm-3"id="pieces_blue">
           <div class="col-12 desc">青チーム</div>
-          <button class="col-6 l" id="1-3-1" onclick="pickup(3,1,1)">
+          <button class="col-4 col-sm-6 l" id="1-3-1" onclick="pickup(3,1,1)">
             <span class="piece blue">L</span>
           </button>
-          <button class="col-6 l" id="1-3-2" onclick="pickup(3,2,1)">
+          <button class="col-4 col-sm-6 l" id="1-3-2" onclick="pickup(3,2,1)">
             <span class="piece blue">L</span>
           </button>
-          <button class="col-6 m" id="1-2-1" onclick="pickup(2,1,1)">
+          <button class="col-4 col-sm-6 m" id="1-2-1" onclick="pickup(2,1,1)">
             <span class="piece blue">M</span>
           </button>
-          <button class="col-6 m" id="1-2-2" onclick="pickup(2,2,1)">
+          <button class="col-4 col-sm-6 m" id="1-2-2" onclick="pickup(2,2,1)">
             <span class="piece blue">M</span>
           </button>
-          <button class="col-6 s" id="1-1-1" onclick="pickup(1,1,1)">
+          <button class="col-4 col-sm-6 s" id="1-1-1" onclick="pickup(1,1,1)">
             <span class="piece blue">S</span>
           </button>
-          <button class="col-6 s" id="1-1-2" onclick="pickup(1,2,1)">
+          <button class="col-4 col-sm-6 s" id="1-1-2" onclick="pickup(1,2,1)">
             <span class="piece blue">S</span>
           </button>
         </div>
       </div>
-      <div class="row reset-button">
-        <button onclick="reset()">reset</button>
-      </div>
       <div class="row cancel">
-        <button onclick="cancel()">cansel</button>
+        <button onclick="cancel()">キャンセル</button>
+      </div>
+      <div class="row reset-button">
+        <button onclick="reset()">リセット</button>
       </div>
     </div>
     <script src="./main.js"></script>
