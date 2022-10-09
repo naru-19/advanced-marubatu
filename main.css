@@ -1,0 +1,91 @@
+button:focus {
+  outline: 0;
+}
+.turn-info {
+  font-size: 40px;
+  text-align: center;
+}
+.reset-button button {
+  margin-top: 60px;
+  background-color: white;
+  height: 80px;
+  border-radius: 10px;
+  font-size: 30px;
+}
+.container {
+  width: 900px;
+  margin-top: 70px;
+}
+.line .col-4 {
+  border: 0px solid black;
+  text-align: center;
+  padding: 0;
+}
+.row {
+  padding: 0;
+  margin: 0;
+}
+button {
+  height: 130px;
+  width: 100%;
+  border: 2px solid black;
+}
+.ox {
+  font-size: 50px;
+}
+.desc {
+  text-align: center;
+}
+.red {
+  color: red;
+}
+.blue {
+  color: blue;
+}
+.l {
+  font-size: 60px;
+  text-align: center;
+}
+.l span {
+  padding: 0 17px 0 22px;
+  border-radius: 60px;
+}
+.m {
+  font-size: 40px;
+  text-align: center;
+}
+.m span {
+  padding: 0 6px 0 6px;
+  border-radius: 30px;
+}
+.s {
+  font-size: 20px;
+  text-align: center;
+}
+.s span {
+  padding: 0 6px 0 6px;
+  border-radius: 30px;
+}
+button .red {
+  border: 2px solid red;
+}
+button .blue {
+  border: 2px solid blue;
+}
+.pieces button {
+  background-color: white;
+  border: none;
+  margin: 0;
+  padding: 0;
+  height: 120px;
+}
+.cancel {
+  margin-top: 50px;
+}
+.cancel button {
+  margin-top: 60px;
+  background-color: white;
+  height: 80px;
+  border-radius: 10px;
+  font-size: 30px;
+}
