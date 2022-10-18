@@ -11,8 +11,6 @@ var size_info = [
   ["m", "M"],
   ["l", "L"],
 ];
-// document.getElementById("pieces_"+team_str[1]).style.display ="none";
-// document.getElementById("pieces_"+team_str[1]+"_margin").style.display ="none";
 const turn_info = document.getElementById("turn");
 turn_info.style.color = "red";
 var board_state = [
@@ -63,10 +61,10 @@ async function judge() {
               board_state[lines[i][0]][board_state[lines[i][0]].length - 1][1]
             ];
         }
-        var team_str = ["赤チーム", "青チーム"];
+        var team_name = ["赤チーム", "青チーム"];
         await wait();
         alert(
-          team_str[
+          team_name[
             board_state[lines[i][0]][board_state[lines[i][0]].length - 1][1]
           ] + "の勝利です!!!"
         );
@@ -79,15 +77,6 @@ function turn_end() {
   document.getElementById("hold-info").innerHTML = "&nbsp;";
   turn += 1;
   turn_info.style.color = team_str[turn % 2];
-//   document.getElementById("pieces_"+team_str[turn%2]).style.display ="";
-//   if(turn%2==1){
-//     document.getElementById("pieces_blue_margin").style.display ="";
-//   }
-//   else{
-//     document.getElementById("pieces_blue_margin").style.display ="none";
-//   }
-//   document.getElementById("pieces_"+team_str[(1+turn)%2]).style.display ="none";
-  
   judge();
   formboard = false;
 }
