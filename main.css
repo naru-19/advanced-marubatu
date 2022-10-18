@@ -1,3 +1,6 @@
+.rule{
+    margin-top: 15px;
+}
 .open {
 	cursor:pointer;
     border: 2px solid #446464;
@@ -40,7 +43,7 @@
 }
 
 body {
-overflow-x: hidden;
+    overflow-x: hidden;
 }
 .row{
     margin-left:0;
