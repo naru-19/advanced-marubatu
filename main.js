@@ -14,17 +14,18 @@ var size_info = [
 const turn_info = document.getElementById("turn");
 turn_info.style.color = "red";
 var board_state = [
-  [[0, 2]],
-  [[0, 3]],
-  [[0, 4]],
-  [[0, 5]],
-  [[0, 6]],
-  [[0, 7]],
-  [[0, 8]],
-  [[0, 9]],
-  [[0, 10]],
+  // [size,color]
+  [[0, -1]],
+  [[0, -1]],
+  [[0, -1]],
+  [[0, -1]],
+  [[0, -1]],
+  [[0, -1]],
+  [[0, -1]],
+  [[0, -1]],
+  [[0, -1]],
 ];
-var formboard = false;
+var fromboard = false;
 //-----------------------------
 const wait = () => {
   return new Promise((resolve, reject) => {
@@ -43,15 +44,18 @@ async function judge() {
     [0, 4, 8],
     [2, 4, 6],
   ];
+  // 列カラーが同じなら勝利
   for (var i = 0; i < lines.length; i++) {
     if (
       board_state[lines[i][0]][board_state[lines[i][0]].length - 1][1] ==
-      board_state[lines[i][1]][board_state[lines[i][1]].length - 1][1]
+      board_state[lines[i][1]][board_state[lines[i][1]].length - 1][1] &&
+      board_state[lines[i][0]][board_state[lines[i][0]].length - 1][1] != -1
     ) {
       if (
         board_state[lines[i][0]][board_state[lines[i][0]].length - 1][1] ==
         board_state[lines[i][2]][board_state[lines[i][2]].length - 1][1]
       ) {
+        // 揃ったラインの各マスの枠を勝利チームの色にする。
         for (var j = 0; j < 3; j++) {
           var grid = document.getElementById("button-" + String(lines[i][j]));
           var team_color = ["red", "blue"];
@@ -73,14 +77,16 @@ async function judge() {
   }
 }
 
+// ターン終了時イベント
 function turn_end() {
   document.getElementById("hold-info").innerHTML = "&nbsp;";
   turn += 1;
   turn_info.style.color = team_str[turn % 2];
   judge();
-  formboard = false;
+  fromboard = false;
 }
 
+// ボードに駒を置く
 function put_item_board(x, size, team, sudo = false) {
   if (size > board_state[x][board_state[x].length - 1][0] || sudo) {
     var target_area = document.getElementById(x);
@@ -103,6 +109,7 @@ function put_item_board(x, size, team, sudo = false) {
   }
 }
 
+// ベンチから駒を持ち上げる。
 function pickup(size, idx, team) {
   if (team != turn % 2) {
     alert("あなたのターンではありません");
@@ -124,7 +131,7 @@ function pickup(size, idx, team) {
       return;
     }
   }
-  formboard = false;
+  fromboard = false;
   document.getElementById(
     String(team) + "-" + String(size) + "-" + String(idx)
   ).disabled = true;
@@ -141,6 +148,7 @@ function pickup(size, idx, team) {
   current_id = idx;
   current_team = team;
   pickup_state += 1;
+  // 所持情報の更新
   document.getElementById("hold-info").innerHTML =
     size_info[size][1] + "を持っています";
   document.getElementById("hold-info").style.color = team_str[current_team % 2];
@@ -157,7 +165,7 @@ function put_board(x) {
 
 function pickup_from_board(x) {
   if (board_state[x].length > 1) {
-    formboard = true;
+    fromboard = true;
     current_team = board_state[x][board_state[x].length - 1][1];
     current_size = board_state[x][board_state[x].length - 1][0];
     if (current_team != turn % 2) {
@@ -189,9 +197,10 @@ function reset() {
   location.reload();
 }
 
+// 持ち上げキャンセル(ベンチからのみ)
 function cancel() {
   if (pickup_state % 2 != 1) return;
-  if (!formboard) {
+  if (!fromboard) {
     document.getElementById("hold-info").innerHTML = "&nbsp;";
     pickup_state -= 1;
     document.getElementById(
