@@ -11,8 +11,6 @@ var size_info = [
   ["m", "M"],
   ["l", "L"],
 ];
-// document.getElementById("pieces_"+team_str[1]).style.display ="none";
-// document.getElementById("pieces_"+team_str[1]+"_margin").style.display ="none";
 const turn_info = document.getElementById("turn");
 turn_info.style.color = "red";
 var board_state = [
@@ -26,11 +24,11 @@ var board_state = [
   [[0, 9]],
   [[0, 10]],
 ];
-var formboard = false;
+var fromboard = false;
 //-----------------------------
-const wait = () => {
+const wait = (wait_sec=20) => {
   return new Promise((resolve, reject) => {
-    setTimeout(resolve, 20);
+    setTimeout(resolve, wait_sec);
   });
 };
 // 勝利判定
@@ -63,10 +61,10 @@ async function judge() {
               board_state[lines[i][0]][board_state[lines[i][0]].length - 1][1]
             ];
         }
-        var team_str = ["赤チーム", "青チーム"];
+        var team_name = ["赤チーム", "青チーム"];
         await wait();
         alert(
-          team_str[
+          team_name[
             board_state[lines[i][0]][board_state[lines[i][0]].length - 1][1]
           ] + "の勝利です!!!"
         );
@@ -75,23 +73,16 @@ async function judge() {
   }
 }
 
+// ターン終了時イベント
 function turn_end() {
   document.getElementById("hold-info").innerHTML = "&nbsp;";
   turn += 1;
   turn_info.style.color = team_str[turn % 2];
-//   document.getElementById("pieces_"+team_str[turn%2]).style.display ="";
-//   if(turn%2==1){
-//     document.getElementById("pieces_blue_margin").style.display ="";
-//   }
-//   else{
-//     document.getElementById("pieces_blue_margin").style.display ="none";
-//   }
-//   document.getElementById("pieces_"+team_str[(1+turn)%2]).style.display ="none";
-  
   judge();
-  formboard = false;
+  fromboard = false;
 }
 
+// ボード上に駒を置くイベント処理
 function put_item_board(x, size, team, sudo = false) {
   if (size > board_state[x][board_state[x].length - 1][0] || sudo) {
     var target_area = document.getElementById(x);
@@ -114,6 +105,7 @@ function put_item_board(x, size, team, sudo = false) {
   }
 }
 
+// ベンチから駒を持ち上げるイベント
 function pickup(size, idx, team) {
   if (team != turn % 2) {
     alert("あなたのターンではありません");
@@ -122,7 +114,7 @@ function pickup(size, idx, team) {
   if (pickup_state % 2 != 0) {
     return;
   }
-  // もし盤面上の全てのマスにコマがある場合sは移動できない．
+  // もし盤面上の全てのマスにコマがある場合sは盤面上に出せない。
   if (size == 1) {
     var flag = false;
     for (var i = 0; i < 9; i++) {
@@ -135,7 +127,8 @@ function pickup(size, idx, team) {
       return;
     }
   }
-  formboard = false;
+  fromboard = false;
+  // 表示処理
   document.getElementById(
     String(team) + "-" + String(size) + "-" + String(idx)
   ).disabled = true;
@@ -157,7 +150,8 @@ function pickup(size, idx, team) {
   document.getElementById("hold-info").style.color = team_str[current_team % 2];
 }
 
-function put_board(x) {
+// 盤面上に触れるイベント処理、駒を置くor拾う
+function touch_board(x) {
   console.log(pickup_state);
   if (pickup_state % 2 == 0) {
     pickup_from_board(x);
@@ -166,9 +160,10 @@ function put_board(x) {
   }
 }
 
+// 盤面上に駒を置くイベント処理
 function pickup_from_board(x) {
   if (board_state[x].length > 1) {
-    formboard = true;
+    fromboard = true;
     current_team = board_state[x][board_state[x].length - 1][1];
     current_size = board_state[x][board_state[x].length - 1][0];
     if (current_team != turn % 2) {
@@ -200,9 +195,10 @@ function reset() {
   location.reload();
 }
 
+// 持ち上げた駒のキャンセル(ベンチからの持ち上げ時のみ)
 function cancel() {
   if (pickup_state % 2 != 1) return;
-  if (!formboard) {
+  if (!fromboard) {
     document.getElementById("hold-info").innerHTML = "&nbsp;";
     pickup_state -= 1;
     document.getElementById(
